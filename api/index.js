@@ -11,7 +11,6 @@ const bot = new TelegramBot(token, {polling: true});
 
 
 // bots
-let state = 2;
 bot.onText(/\/start/, (msg) => {    
     console.log(msg)
     bot.sendMessage(
@@ -30,7 +29,7 @@ bot.onText(/\/predict/,(msg) => {
     );
 });
 
-not.on(`message`,(msg) => {
+bot.on(`message`,(msg) => {
     if(state == 1){
         s = msg.text.split("|");
         i = s[0]
