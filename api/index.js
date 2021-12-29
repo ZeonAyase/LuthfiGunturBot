@@ -13,71 +13,47 @@ const bot = new TelegramBot(token, {polling: true});
 // bots
 let state = 2;
 bot.onText(/\/start/, (msg) => {    
-    state = 0;
+    console.log(msg)
     bot.sendMessage(
         msg.chat.id,
-        `Selamat datang di BOT prediksi Tegangan & Daya menggunakan Deep Neural Network.
-        \nSilahkan pilih menu dibawah ini:\n
-        (/1) Prediksi dengan Input i|r
-        (/2) Batal`
-    ); 
-    bot.sendMessage(msg.chat.id, "Pilihan Anda: ");    
+        `Hello $(msg.chat.first_name), welcome...\n
+        click/predict`
+    );    
 });
 
-bot.onText(/\/1/, (msg) => {
-    state = 1;
+//input requires i and v
+state = 0;
+bot.onText(/\/predict/,(msg) => {
     bot.sendMessage(
-        msg.chat.id, 
-        `Masukan nilai i dan r
-        contohnya: 12|36`
-    );   
+        msg.chat.id,
+        `Masukan nilai i|v contohnya 9|9`
+    );
 });
 
-bot.onText(/\/2/, (msg) => {
-    state = 2;
-    bot.sendMessage(
-        msg.chat.id, 
-        "pilih /start untuk kembali ke menu utama"
-    );   
-});
-
-bot.on('message', (msg) => {
-    const text = msg.text.toString().toLowerCase();
-    console.log(text);
-
+not.on(`message`,(msg) => {
     if(state == 1){
-        let dt = text.split('|');
-        bot.sendMessage(
-            msg.chat.id, 
-            `prediksi tegangan dan daya dengan arus (${dt[0]} A) dan resistansi (${dt[1]} Ohm) `
-        );
-
+        s = msg.text.split("|");
+        i = s[0]
+        v = s[1]
         model.predict(
             [
-                parseFloat(dt[0]), // string to float
-                parseFloat(dt[1])
+                parseFloat(s[0]), //string to float
+                parseFloat(s[0])
             ]
-        ).then((jres) => {
+        ).then((jres)=>{
             bot.sendMessage(
-                msg.chat.id, 
-                `nilai v dan p adalah (${jres[0]} volt) dan (${jres[1]} watt)`
+                msg.chat.id,
+                `nilai v yang diprediksi adalah ${jres[0]}volt`
             );
             bot.sendMessage(
                 msg.chat.id,
-                `<= kembali /2`
+                'nilai p yang diprediksi adalah ${jres[0]}watt`
             );
-        });        
-    }
-
-    if(state == 2){
-        bot.sendMessage(
-            msg.chat.id, 
-            "pilih /start untuk ke menu utama"
-        );   
+        })
+    }else{
+        state = 0
     }
 })
-
-
 
 // routers
 r.get('/prediction/:i/:r', function(req, res, next) {    
