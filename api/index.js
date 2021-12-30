@@ -25,30 +25,35 @@ state = 0;
 bot.onText(/\/predict/,(msg) => {
     bot.sendMessage(
         msg.chat.id,
-        'Masukan nilai i|r contohnya 9|9'
+        'Masukan nilai x1|x2|x3 contohnya 30|88|122`
     );
     state = 1;
 });
 
 bot.on('message', (msg) => {
     if(state == 1){
-        s = msg.text.split("|");
-        i = s[0]
-        r = s[1]
+        s = msg.text.split("| |");
+        x1 = s[0]
+        x2 = s[1]
+        x3 = x[2]
         model.predict(
             [
-                parseFloat(s[0]),
-                parseFloat(s[0])
+                parseFloat(s[0]), // string to  float
+                parseFloat(s[1]),
+                parseFloat(s[2])
             ]
         ).then((jres)=>{
             bot.sendMessage(
                 msg.chat.id,
-                `Nilai V yang diprediksi adalah $(jres[0]) Volt`
+                `Nilai nx1 yang diprediksi adalah $(jres[0]) Volt`
             );
             bot.sendMessage(
                 msg.chat.id,
-                `Nilai W yang diprediksi adalah $(jres[1]) Watt`
+                `Nilai nx2 yang diprediksi adalah $(jres[1]) Volt`
             );
+            bot.sendMessage(
+                msg.chat.id,
+                `Nilai nx3 yang diprediksi adalah $(jres[2]) Volt`
         })
     }else{
         state = 0
