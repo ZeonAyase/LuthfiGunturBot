@@ -16,15 +16,15 @@ bot.onText(/\/start/, (msg) => {
     state = 0;
     bot.sendMessage(
         msg.chat.id,
-        `Selamat datang di LuthfiGunturBOT. 
+        `Selamat datang $(msg.chat.first_name). 
         \nSilahkan pilih menu dibawah ini:\n
-        (/1) Prediksi dengan Input x1|x2|x3
-        (/2) Batal`
+        click(/predict) Prediksi dengan Input x1|x2|x3
+        click(/close) Batal`
     ); 
     bot.sendMessage(msg.chat.id, "Pilihan Anda: ");    
 });
 
-bot.onText(/\/1/, (msg) => {
+bot.onText(/\/predict/, (msg) => {
     state = 1;
     bot.sendMessage(
         msg.chat.id, 
@@ -33,7 +33,7 @@ bot.onText(/\/1/, (msg) => {
     );   
 });
 
-bot.onText(/\/2/, (msg) => {
+bot.onText(/\/close/, (msg) => {
     state = 2;
     bot.sendMessage(
         msg.chat.id, 
@@ -52,9 +52,15 @@ bot.on('message', (msg) => {
         x3 = dt[2]
         bot.sendMessage(
             msg.chat.id, 
-            `prediksi n x1 (${dt[0]} Volt), x2 (${dt[1]} dan x3 (${dt[2]}) `
+            `x1 (${dt[0]} Volt)`
         );
-
+         bot.sendMessage(
+            msg.chat.id, 
+            `x1 (${dt[1]} Volt)`
+        );
+        bot.sendMessage(
+            msg.chat.id,
+            `x3 (${dt[2]} Volt)`)
         model.predict(
             [
                 parseFloat(dt[0]), // string to float
@@ -64,11 +70,19 @@ bot.on('message', (msg) => {
         ).then((jres) => {
             bot.sendMessage(
                 msg.chat.id, 
-                `nilai x1 , x2, dan x3 adalah (${jres[0]} volt), (${jres[1]} volt), dan (${jres[2]} volt)`
+                `Nilai nx1 adalah (${jres[0]} volt)`
+            );
+            bot.sendMessage(
+                msg.chat.id
+                `Nilai nx1 adalah (${jres[1]} volt)`
+            );
+            bot.sendMessage(
+                msg.chat.id
+                `Nilai nx3 adalah (${jres[2]} volt)`
             );
             bot.sendMessage(
                 msg.chat.id,
-                `<= kembali /2`
+                `<= Kembali ke menu /2`
             );
         });        
     }
