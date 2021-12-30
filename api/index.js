@@ -56,7 +56,7 @@ bot.on('message', (msg) => {
         );
          bot.sendMessage(
             msg.chat.id, 
-            `x1 (${dt[1]} Volt)`
+            `x2 (${dt[1]} Volt)`
         );
         bot.sendMessage(
             msg.chat.id,
@@ -71,15 +71,15 @@ bot.on('message', (msg) => {
         ).then((jres)=>{
              bot.sendMessage(
                 msg.chat.id,
-                `Nilai nx1 yang diprediksi adalah (${jres[0]}) Volt`
+                `Nilai x1 yang diprediksi adalah (${jres[0]}) Volt`
             );
             bot.sendMessage(
                 msg.chat.id,
-                `Nilai nx2 yang diprediksi adalah (${jres[1]}) Volt`
+                `Nilai x2 yang diprediksi adalah (${jres[1]}) Volt`
             );
             bot.sendMessage(
                 msg.chat.id,
-                `Nilai nx3 yang diprediksi adalah (${jres[2]}) Volt`
+                `Nilai x3 yang diprediksi adalah (${jres[2]}) Volt`
             );
         })
     }
