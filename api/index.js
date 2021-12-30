@@ -83,7 +83,7 @@ bot.on('message', (msg) => {
             );
         })
     }
-}
+})
    
 // routers
 r.get('/prediction/:x1/:x2/:x3', function(req, res, next) {    
