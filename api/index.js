@@ -70,15 +70,15 @@ bot.on('message', (msg) => {
          ).then((jres)=>{
             bot.sendMessage(
                 msg.chat.id,
-                `Nilai nx1 yang diprediksi adalah (${jres[0]} Volt`
+                `Nilai nx1 yang diprediksi adalah (${jres[0]}) Volt`
             );
             bot.sendMessage(
                 msg.chat.id,
-                `Nilai nx2 yang diprediksi adalah (${jres[1]} Volt`
+                `Nilai nx2 yang diprediksi adalah (${jres[1]}) Volt`
             );
             bot.sendMessage(
                 msg.chat.id,
-                `Nilai nx3 yang diprediksi adalah (${jres[2]} Volt`
+                `Nilai nx3 yang diprediksi adalah (${jres[2]}) Volt`
         })
     }else{
         state = 0
