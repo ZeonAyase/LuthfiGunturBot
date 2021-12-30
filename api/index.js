@@ -42,13 +42,15 @@ bot.onText(/\/close/, (msg) => {
 });
 
 bot.on('message', (msg) => {
+    const text = msg.text.toString().toLowerCase();
+    console.log(text);
     if(state == 1){
         let dt = text.split('|');
         x1 = dt[0]
         x2 = dt[1]
         x3 = dt[2]
-        
-        bot.sendMessage(
+    
+         bot.sendMessage(
             msg.chat.id, 
             `x1 (${dt[0]} Volt)`
         );
@@ -60,15 +62,14 @@ bot.on('message', (msg) => {
             msg.chat.id,
             `x3 (${dt[2]} Volt)`
         );
-        
         model.predict(
             [
                 parseFloat(dt[0]), // string to float
                 parseFloat(dt[1]),
                 parseFloat(dt[2])
             ]
-         ).then((jres)=>{
-            bot.sendMessage(
+        ).then((jres)=>{
+             bot.sendMessage(
                 msg.chat.id,
                 `Nilai nx1 yang diprediksi adalah (${jres[0]}) Volt`
             );
@@ -81,11 +82,9 @@ bot.on('message', (msg) => {
                 `Nilai nx3 yang diprediksi adalah (${jres[2]}) Volt`
             );
         })
-    }else{
-        state = 0
     }
-})
-
+}
+   
 // routers
 r.get('/prediction/:x1/:x2/:x3', function(req, res, next) {    
     model.predict(
