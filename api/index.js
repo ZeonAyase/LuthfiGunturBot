@@ -47,6 +47,7 @@ bot.on('message', (msg) => {
         x1 = dt[0]
         x2 = dt[1]
         x3 = dt[2]
+        
         bot.sendMessage(
             msg.chat.id, 
             `x1 (${dt[0]} Volt)`
@@ -59,34 +60,30 @@ bot.on('message', (msg) => {
             msg.chat.id,
             `x3 (${dt[2]} Volt)`
         );
+        
         model.predict(
             [
                 parseFloat(dt[0]), // string to float
                 parseFloat(dt[1]),
                 parseFloat(dt[2])
             ]
-        ).then((jres) => {
+         ).then((jres)=>{
             bot.sendMessage(
-                msg.chat.id, 
-                `Nilai nx1 adalah (${jres[0]} volt)`
-            );
-            bot.sendMessage(
-                msg.chat.id
-                `Nilai nx1 adalah (${jres[1]} volt)`
-            );
-            bot.sendMessage(
-                msg.chat.id
-                `Nilai nx3 adalah (${jres[2]} volt)`
+                msg.chat.id,
+                `Nilai nx1 yang diprediksi adalah (${jres[0]} Volt`
             );
             bot.sendMessage(
                 msg.chat.id,
-                `<= Kembali ke menu /2`
+                `Nilai nx2 yang diprediksi adalah (${jres[1]} Volt`
             );
-        });        
+            bot.sendMessage(
+                msg.chat.id,
+                `Nilai nx3 yang diprediksi adalah (${jres[2]} Volt`
+        })
+    }else{
+        state = 0
     }
 })
-
-
 
 // routers
 r.get('/prediction/:x1/:x2/:x3', function(req, res, next) {    
