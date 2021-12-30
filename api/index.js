@@ -42,9 +42,6 @@ bot.onText(/\/close/, (msg) => {
 });
 
 bot.on('message', (msg) => {
-    const text = msg.text.toString().toLowerCase();
-    console.log(text);
-
     if(state == 1){
         let dt = text.split('|');
         x1 = dt[0]
