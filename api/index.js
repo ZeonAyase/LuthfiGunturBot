@@ -79,6 +79,7 @@ bot.on('message', (msg) => {
             bot.sendMessage(
                 msg.chat.id,
                 `Nilai nx3 yang diprediksi adalah (${jres[2]}) Volt`
+            );
         })
     }else{
         state = 0
