@@ -47,6 +47,17 @@ bot.on('message', (msg) => {
         x1 = dt[0]
         x2 = dt[1]
         x3 = dt[2]
+        bot.sendMessage(
+            msg.chat.id, 
+            `x1 (${dt[0]} Volt)`
+        );
+         bot.sendMessage(
+            msg.chat.id, 
+            `x1 (${dt[1]} Volt)`
+        );
+        bot.sendMessage(
+            msg.chat.id,
+            `x3 (${dt[2]} Volt)`
         model.predict(
             [
                 parseFloat(dt[0]), // string to float
