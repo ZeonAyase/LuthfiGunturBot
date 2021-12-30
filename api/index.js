@@ -32,10 +32,10 @@ bot.onText(/\/predict/,(msg) => {
 
 bot.on('message', (msg) => {
     if(state == 1){
-        s = msg.text.split("| |");
+        s = msg.text.split("|");
         x1 = s[0]
         x2 = s[1]
-        x3 = x[2]
+        x3 = s[2]
         model.predict(
             [
                 parseFloat(s[0]), // string to  float
@@ -61,11 +61,12 @@ bot.on('message', (msg) => {
 })
 
 // routers
-r.get('/prediction/:i/:r', function(req, res, next) {    
+r.get('/prediction/:x1/:x2/:x3', function(req, res, next) {    
     model.predict(
         [
-            parseFloat(req.params.i), // string to float
-            parseFloat(req.params.r)
+            parseFloat(req.params.x1), // string to float
+            parseFloat(req.params.x2),
+            parseFloat(req.params.x2)
         ]
     ).then((jres)=>{
         res.json(jres);
