@@ -1,20 +1,22 @@
 const tf = require('@tensorflow/tfjs-node');
 
 function normalized(data){ // i & r
-    i = (data[0] - 12.585) / 6.813882
-    r = (data[1] - 51.4795) / 29.151289
-    return [i, r]
+    x1 = (data[0] - 42.31879699) / 10.48653863
+    x2 = (data[1] - 88.8075188) / 19.29328815
+    x3 = (data[2] - 142.718797) / 23.03331842
+    return [x1, x2, x3]
 }
 
 function denormalized(data){
-    v = (data[0] * 552.6264) + 650.4795
-    p = (data[1] * 12153.8) + 10620.5615
-    return [v, p]
+    nx1 = (data[0] * 9.12330183) + 50.89473684
+    nx2 = (data[1] * 14.55269981) + 10620.5615
+    nx2 = (data[1] * 24.38662034) + 159.081203
+    return [nx1, nx2, nx3]
 }
 
 
 async function predict(data){
-    let in_dim = 2;
+    let in_dim = 3;
     
     data = normalized(data);
     shape = [1, in_dim];
@@ -23,7 +25,7 @@ async function predict(data){
 
     try{
         // path load in public access => github
-        const path = 'https://raw.githubusercontent.com/zendi014/jst_service/main/public/ex_model/model.json';
+        const path = 'https://raw.githubusercontent.com/ZeonAyase/LuthfiGunturBot/main/public/ex_model/model.json';
         const model = await tf.loadGraphModel(path);
         
         predict = model.predict(
