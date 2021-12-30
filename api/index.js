@@ -16,10 +16,10 @@ bot.onText(/\/start/, (msg) => {
     state = 0;
     bot.sendMessage(
         msg.chat.id,
-        `Selamat datang $(msg.chat.first_name). 
+        `Selamat datang Muhammad Luthfi Guntur Putra. 
         \nSilahkan pilih menu dibawah ini:\n
         click(/predict) Prediksi dengan Input x1|x2|x3
-        click(/close) Batal`
+        click(/close) Menu batal`
     ); 
     bot.sendMessage(msg.chat.id, "Pilihan Anda: ");    
 });
@@ -50,17 +50,6 @@ bot.on('message', (msg) => {
         x1 = dt[0]
         x2 = dt[1]
         x3 = dt[2]
-        bot.sendMessage(
-            msg.chat.id, 
-            `x1 (${dt[0]} Volt)`
-        );
-         bot.sendMessage(
-            msg.chat.id, 
-            `x1 (${dt[1]} Volt)`
-        );
-        bot.sendMessage(
-            msg.chat.id,
-            `x3 (${dt[2]} Volt)`)
         model.predict(
             [
                 parseFloat(dt[0]), // string to float
@@ -85,13 +74,6 @@ bot.on('message', (msg) => {
                 `<= Kembali ke menu /2`
             );
         });        
-    }
-
-    if(state == 2){
-        bot.sendMessage(
-            msg.chat.id, 
-            "pilih /start untuk ke menu utama"
-        );   
     }
 })
 
